@@ -4,4 +4,6 @@ import br.com.mpbruder.storage02.model.Book;
 
 public interface IBookService {
     Book findById(long id);
+
+    void delete(long id);
 }

@@ -19,4 +19,9 @@ public class BookService implements IBookService {
         Optional<Book> optionalBook = repository.findById(id);
         return optionalBook.orElse(null);
     }
+
+    @Override
+    public void delete(long id) {
+        repository.deleteById(id);
+    }
 }

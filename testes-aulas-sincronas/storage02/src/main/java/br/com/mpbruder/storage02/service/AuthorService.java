@@ -16,6 +16,7 @@ public class AuthorService implements IAuthorService {
 
     @Override
     public Author insert(Author author) {
+        author.getAddress().setAuthor(author);
         return repository.save(author);
     }
 
@@ -23,5 +24,25 @@ public class AuthorService implements IAuthorService {
     public Author findById(long id) {
         Optional<Author> optionalAuthor = repository.findById(id);
         return optionalAuthor.orElse(null);
+    }
+
+    @Override
+    public void delete(long id) {
+        repository.deleteById(id);
+    }
+
+    @Override
+    public br.com.mpbruder.storage02.dto.AuthorDTO getById(long id) {
+        return repository.getById(id);
+    }
+
+    @Override
+    public Author getNativeById(long id) {
+        return repository.getNativeById(id);
+    }
+
+    @Override
+    public br.com.mpbruder.storage02.dto.AuthorDTO getDtoEagle(long id) {
+        return repository.getDtoEagle(id);
     }
 }

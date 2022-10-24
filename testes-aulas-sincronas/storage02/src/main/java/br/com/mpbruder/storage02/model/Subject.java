@@ -21,7 +21,7 @@ public class Subject {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "subject")
+    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY) // Busca somente quando eu precisar
     @JsonIgnoreProperties("subject")
     private List<Book> books;
 }

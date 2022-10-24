@@ -8,4 +8,12 @@ public interface IAuthorService {
 
     Author findById(long id);
 
+    void delete(long id);
+
+    br.com.mpbruder.storage02.dto.AuthorDTO getById(long id);
+
+    Author getNativeById(long id);
+
+    br.com.mpbruder.storage02.dto.AuthorDTO getDtoEagle(long id);
+
 }

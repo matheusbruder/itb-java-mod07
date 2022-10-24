@@ -1,5 +1,6 @@
 package br.com.mpbruder.storage02.controller;
 
+import br.com.mpbruder.storage02.dto.AuthorDTO;
 import br.com.mpbruder.storage02.model.Author;
 import br.com.mpbruder.storage02.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,44 @@ public class AuthorController {
         Author author = service.findById(id);
         if (author != null) {
             return ResponseEntity.ok(author);
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/dto/{id}")
+    public ResponseEntity<br.com.mpbruder.storage02.dto.AuthorDTO> getById(@PathVariable long id) {
+        br.com.mpbruder.storage02.dto.AuthorDTO authorDTO = service.getById(id);
+        if (authorDTO != null) {
+            return ResponseEntity.ok(authorDTO);
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/native/{id}")
+    public ResponseEntity<Author> getNativeById(@PathVariable long id) {
+        Author author = service.getNativeById(id);
+        if (author != null) {
+            return ResponseEntity.ok(author);
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("/dtoeagle/{id}")
+    public ResponseEntity<AuthorDTO> getDtoEagle(@PathVariable long id) {
+        AuthorDTO authorDTO = service.getDtoEagle(id);
+        if (authorDTO != null) {
+            return ResponseEntity.ok(authorDTO);
         }
         else {
             return ResponseEntity.notFound().build();
