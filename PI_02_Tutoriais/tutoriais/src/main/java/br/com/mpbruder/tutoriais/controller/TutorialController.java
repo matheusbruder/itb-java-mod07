@@ -17,7 +17,7 @@ public class TutorialController {
     @Autowired
     private ITutorialService service;
 
-    // TODO: Tratar exception de title null
+    // TODO (Tratar exception de title null)
     @PostMapping
     public ResponseEntity<Tutorial> insert(@RequestBody Tutorial tutorial) {
         Tutorial newTutorial = service.insert(tutorial);
@@ -60,7 +60,7 @@ public class TutorialController {
         return new ResponseEntity<>(publishedTutorials, HttpStatus.OK);
     }
 
-    @GetMapping("/bytitle")
+    @GetMapping("/findby")
     public ResponseEntity<List<Tutorial>> findByTitleContaining(@RequestParam String title) {
         List<Tutorial> tutorials = service.findByTitleContaining(title);
         return new ResponseEntity<>(tutorials, HttpStatus.OK);

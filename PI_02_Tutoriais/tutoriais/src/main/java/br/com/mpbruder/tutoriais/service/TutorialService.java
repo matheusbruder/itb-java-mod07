@@ -75,7 +75,7 @@ public class TutorialService implements ITutorialService {
 
     @Override
     public List<Tutorial> findByStatusIsPublished() {
-        List<Tutorial> publishedTutorials = repo.findByStatusIsPublished();
+        List<Tutorial> publishedTutorials = repo.findByStatusIs(Status.PUBLISHED);
         if (publishedTutorials.isEmpty()) {
             throw new NotFoundException("No published tutorials available");
         }
@@ -90,6 +90,5 @@ public class TutorialService implements ITutorialService {
         }
         return tutorials;
     }
-
 
 }

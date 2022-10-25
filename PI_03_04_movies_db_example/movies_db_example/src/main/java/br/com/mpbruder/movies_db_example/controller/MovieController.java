@@ -1,6 +1,5 @@
 package br.com.mpbruder.movies_db_example.controller;
 
-import br.com.mpbruder.movies_db_example.model.Movie;
 import br.com.mpbruder.movies_db_example.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
