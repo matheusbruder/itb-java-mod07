@@ -4,20 +4,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 public class Tutorial {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
+    @Column(length = 50, nullable = false)
     private String title;
+
+    @Column(length = 100)
     private String description;
-    private boolean isPublished;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
 }

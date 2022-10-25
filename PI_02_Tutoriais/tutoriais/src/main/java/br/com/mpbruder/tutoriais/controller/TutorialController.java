@@ -1,7 +1,8 @@
 package br.com.mpbruder.tutoriais.controller;
 
+import br.com.mpbruder.tutoriais.model.Status;
 import br.com.mpbruder.tutoriais.model.Tutorial;
-import br.com.mpbruder.tutoriais.service.TutorialService;
+import br.com.mpbruder.tutoriais.service.ITutorialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,9 @@ import java.util.List;
 public class TutorialController {
 
     @Autowired
-    private TutorialService service;
+    private ITutorialService service;
 
+    // TODO: Tratar exception de title null
     @PostMapping
     public ResponseEntity<Tutorial> insert(@RequestBody Tutorial tutorial) {
         Tutorial newTutorial = service.insert(tutorial);
@@ -25,13 +27,13 @@ public class TutorialController {
     @GetMapping
     public ResponseEntity<List<Tutorial>> findAll() {
         List<Tutorial> tutorials = service.findAll();
-        return new ResponseEntity<>(tutorials, HttpStatus.CREATED);
+        return new ResponseEntity<>(tutorials, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Tutorial> findById(@PathVariable long id) {
         Tutorial tutorial = service.findById(id);
-        return new ResponseEntity<>(tutorial, HttpStatus.CREATED);
+        return new ResponseEntity<>(tutorial, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
@@ -53,14 +55,22 @@ public class TutorialController {
     }
 
     @GetMapping("/published")
-    public ResponseEntity<List<Tutorial>> getPublishedTutorials() {
-        List<Tutorial> publishedTutorials = service.getPublishedTutorials();
+    public ResponseEntity<List<Tutorial>> findByStatusIsPublished() {
+        List<Tutorial> publishedTutorials = service.findByStatusIsPublished();
         return new ResponseEntity<>(publishedTutorials, HttpStatus.OK);
     }
 
     @GetMapping("/bytitle")
-    public ResponseEntity<List<Tutorial>> getTutorialByTitle(@RequestParam String title) {
-        List<Tutorial> tutorials = service.getTutorialByTitle(title);
+    public ResponseEntity<List<Tutorial>> findByTitleContaining(@RequestParam String title) {
+        List<Tutorial> tutorials = service.findByTitleContaining(title);
         return new ResponseEntity<>(tutorials, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}/published")
+    public ResponseEntity<Tutorial> updateStatusPublished(@PathVariable long id) {
+        Tutorial tutorial = service.findById(id);
+        tutorial.setStatus(Status.PUBLISHED);
+        tutorial = service.updateById(tutorial, tutorial.getId());
+        return new ResponseEntity<>(tutorial, HttpStatus.OK);
     }
 }
