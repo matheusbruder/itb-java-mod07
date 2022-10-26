@@ -69,7 +69,7 @@ public class TutorialService implements ITutorialService {
 
     @Override
     public void deleteById(long id) {
-        Tutorial tutorial = getTutorial(id);
+        var tutorial = getTutorial(id);
         repo.deleteById(tutorial.getId());
     }
 
